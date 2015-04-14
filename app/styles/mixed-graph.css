@@ -1,0 +1,30 @@
+.mixed-graph rect {
+  fill: steelblue;
+}
+
+.mixed-graph text {
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.mixed-graph .axis text {
+  font: 10px sans-serif;
+}
+
+.mixed-graph .axis path,
+.mixed-graph .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.mixed-graph axis path {
+    fill: none;
+    stroke: #777;
+    shape-rendering: crispEdges;
+}
+.mixed-graph .axis text {
+    font-family: Lato;
+    font-size: 13px;
+}

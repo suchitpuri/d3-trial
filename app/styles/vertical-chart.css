@@ -1,0 +1,20 @@
+.vertical-chart rect {
+  fill: steelblue;
+}
+
+.vertical-chart text {
+  fill: black;
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.vertical-chart .axis text {
+  font: 10px sans-serif;
+}
+
+.vertical-chart .axis path,
+.vertical-chart .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}

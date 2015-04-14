@@ -1,0 +1,9 @@
+.svg-chart rect {
+  fill: steelblue;
+}
+
+.svg-chart text {
+  fill: white;
+  font: 10px sans-serif;
+  text-anchor: end;
+}

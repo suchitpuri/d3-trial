@@ -1,0 +1,15 @@
+.d3-text text {
+  font: bold 48px monospace;
+}
+
+.d3-text .enter {
+  fill: green;
+}
+
+.d3-text .update {
+  fill: #333;
+}
+
+.d3-text .exit {
+  fill: brown;
+}
