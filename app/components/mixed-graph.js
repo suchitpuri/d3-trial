@@ -38,6 +38,14 @@ export default Ember.Component.extend({
 
 	didInsertElement: function(){
 
+   // var colorScale = d3.scale.linear()
+   //                    .domain([d3.min(this.get("data"),function(d){ return d.value}), d3.max(this.get("data"),function(d){ return d.value})])
+   //                    //.interpolate(d3.interpolateHsl)
+   //                    //.interpolate(d3.interpolateLab)
+   //                    .interpolate(d3.interpolateHcl)
+   //                    .range(["#007AFF", "#FFF500"]);
+
+
    var data = this.get('data');
    var self = this;
 
@@ -72,26 +80,45 @@ export default Ember.Component.extend({
       .attr("class", "y axis")
       .call(yAxis);
 
+    var gradient = chart.append("svg:defs")
+      .append("svg:linearGradient")
+        .attr("id", "gradient")
+        .attr("x1", "0%")
+        .attr("y1", "0%")
+        .attr("x2", "100%")
+        .attr("y2", "100%")
+        .attr("spreadMethod", "pad");
+    
+    gradient.append("svg:stop")
+        .attr("offset", "0%")
+        .attr("stop-color", "#0c0")
+        .attr("stop-opacity", 1);
+    
+    gradient.append("svg:stop")
+        .attr("offset", "100%")
+        .attr("stop-color", "#c00")
+        .attr("stop-opacity", 1);
     
     var bar = chart.selectAll(".bar")
          .data(data)
          .enter();
          
-         bar.append("rect")
-                  .attr("class", "bar")
-                  .attr("x", function(d) { return x(d.name); })
-                  .attr("y", function(d) { return y(d.value); })
-                  .attr("height", function(d) { return self.get("height") - y(d.value); })
-                  .attr("width", x.rangeBand());
-                 
+    bar.append("rect")
+            .attr("class", "bar")
+            .attr("x", function(d) { return x(d.name); })
+            .attr("y", function(d) { return y(d.value); })
+            .attr("height", function(d) { return self.get("height") - y(d.value); })
+            .attr("width", x.rangeBand())
+            .style("fill", "url(#gradient)");
+          
 
+    bar.append("text")
+        .attr("x", function(d) { return x(d.name) + x.rangeBand()/2; })
+        .attr("y", function(d) { return y(d.value) + 10; })
+        .attr("dy", ".35em")
+        .text(function(d) { return d.value; });
 
-          bar.append("text")
-              .attr("x", function(d) { return x(d.name) + x.rangeBand()/2; })
-              .attr("y", function(d) { return y(d.value) + 10; })
-              .attr("dy", ".35em")
-              .text(function(d) { return d.value; });
-
+    
     chart.append("g")
     .attr("class", "y axis")
     .call(yAxis)
